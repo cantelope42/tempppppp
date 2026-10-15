@@ -173,7 +173,7 @@ const Renderer = async options => {
   }
   
   var rsz, ret
-  renderer.resize = e => {
+  const Resize = e => {
     var margin = ret.margin
     var b = document.body
     var n
@@ -188,7 +188,7 @@ const Renderer = async options => {
   }
   
   window.addEventListener('resize', 
-             rsz = e => { renderer.resize() })
+             rsz = e => { renderer.Resize() })
   
   ret = {
     c, ctx, contextType, t:0, alpha,
@@ -201,11 +201,10 @@ const Renderer = async options => {
     cameraMode, showCrosshair, crosshairSel,
     crosshairMap, pageX, pageY, mouseX, mouseY, frameCount,
     mouseButton, rsz, margin, optionalPlugins, fogColor,
-    rotationMode,
+    rotationMode, Resize
   }
   ret[contextType == '2d' ? 'ctx' : 'gl'] = ctx
   var renderer = ret
-  
              
   rsz()
   
