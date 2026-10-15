@@ -192,6 +192,8 @@ const Renderer = async options => {
   }
   
   
+  window.addEventListener('resize', 
+             rsz = e => { renderer.Resize() })
   ret = {
     c, ctx, contextType, t:0, alpha,
     width, height, x, y, z, attachToBody,
@@ -208,8 +210,6 @@ const Renderer = async options => {
   ret[contextType == '2d' ? 'ctx' : 'gl'] = ctx
   var renderer = ret
              
-  window.addEventListener('resize', 
-             rsz = e => { renderer.Resize() })
   rsz()
   
   const Clear = () => {
