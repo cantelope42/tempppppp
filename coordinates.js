@@ -181,8 +181,8 @@ const Renderer = async options => {
     var n
     var d = c.width !== 0 ? c.height / c.width : 1
     if(b.clientHeight/b.clientWidth
-           * (fit=="contain" ? 1 : -1) > d
-           * (fit=="contain" ? 1 : -1)){
+           * (renderer.fit=="contain" ? 1 : -1) > d
+           * (renderer.fit=="contain" ? 1 : -1)){
       c.style.width = `${(n=b.clientWidth) - margin*2}px`
       c.style.height = `${n*d - margin*2}px`
     }else{
@@ -191,8 +191,6 @@ const Renderer = async options => {
     }
   }
   
-  window.addEventListener('resize', 
-             rsz = e => { renderer.Resize() })
   
   ret = {
     c, ctx, contextType, t:0, alpha,
@@ -210,6 +208,8 @@ const Renderer = async options => {
   ret[contextType == '2d' ? 'ctx' : 'gl'] = ctx
   var renderer = ret
              
+  window.addEventListener('resize', 
+             rsz = e => { renderer.Resize() })
   rsz()
   
   const Clear = () => {
