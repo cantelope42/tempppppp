@@ -173,19 +173,6 @@ const Renderer = async options => {
   }
   
   var rsz, ret
-  window.addEventListener('resize', rsz = (e) => {
-    var margin = ret.margin
-    var b = document.body
-    var n
-    var d = c.width !== 0 ? c.height / c.width : 1
-    if(b.clientHeight/b.clientWidth > d){
-      c.style.width = `${(n=b.clientWidth) - margin*2}px`
-      c.style.height = `${n*d - margin*2}px`
-    }else{
-      c.style.height = `${(n=b.clientHeight) - margin*2}px`
-      c.style.width = `${n/d - margin*2}px`
-    }
-  })
   
   ret = {
     c, ctx, contextType, t:0, alpha,
@@ -204,6 +191,22 @@ const Renderer = async options => {
   ret[contextType == '2d' ? 'ctx' : 'gl'] = ctx
   var renderer = ret
   
+  renderer.resize = e => {
+    var margin = ret.margin
+    var b = document.body
+    var n
+    var d = c.width !== 0 ? c.height / c.width : 1
+    if(b.clientHeight/b.clientWidth > d){
+      c.style.width = `${(n=b.clientWidth) - margin*2}px`
+      c.style.height = `${n*d - margin*2}px`
+    }else{
+      c.style.height = `${(n=b.clientHeight) - margin*2}px`
+      c.style.width = `${n/d - margin*2}px`
+    }
+  }
+  
+  window.addEventListener('resize', 
+             rsz = e => { renderer.resize() })
   
   const Clear = () => {
     switch(contextType){
