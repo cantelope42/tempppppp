@@ -187,7 +187,6 @@ const Renderer = async options => {
     mouseButton, rsz, margin, optionalPlugins, fogColor,
     rotationMode,
   }
-  rsz()
   ret[contextType == '2d' ? 'ctx' : 'gl'] = ctx
   var renderer = ret
   
@@ -204,6 +203,7 @@ const Renderer = async options => {
       c.style.width = `${n/d - margin*2}px`
     }
   }
+  rsz()
   
   window.addEventListener('resize', 
              rsz = e => { renderer.resize() })
