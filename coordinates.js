@@ -203,10 +203,11 @@ const Renderer = async options => {
       c.style.width = `${n/d - margin*2}px`
     }
   }
-  rsz()
   
   window.addEventListener('resize', 
              rsz = e => { renderer.resize() })
+             
+  rsz()
   
   const Clear = () => {
     switch(contextType){
