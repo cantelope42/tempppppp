@@ -5114,13 +5114,13 @@ const BasicShader = async (renderer, options=[]) => {
             cosc = cos(0.0);    sinc = sin(0.0);
             ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
             cosa = cos(0.0);    sina = sin(0.0);
-            cosb = cos(-rot.z); sinb = sin(-rot.z);
-            cosc = cos(0.0);    sinc = sin(0.0);
-            ret = pFunc(ret,    cosa, sina, cosb, sinb, cosc, sinc);
-            cosa = cos(0.0);    sina = sin(0.0);
             cosb = cos(0.0);    sinb = sin(0.0);
             cosc = cos(rot.y);  sinc = sin(rot.y);
             ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
+            cosa = cos(0.0);    sina = sin(0.0);
+            cosb = cos(-rot.z); sinb = sin(-rot.z);
+            cosc = cos(0.0);    sinc = sin(0.0);
+            ret = pFunc(ret,    cosa, sina, cosb, sinb, cosc, sinc);
           }
           if(camRotationMode == 1){
             cosa = cos(0.0);    sina = sin(0.0);
