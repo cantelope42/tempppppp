@@ -209,7 +209,7 @@ const Renderer = async options => {
   ret[contextType == '2d' ? 'ctx' : 'gl'] = ctx
   var renderer = ret
              
-  const ActualPosition  = () => {
+  renderer.ActualPosition  = () => {
     var ret = {x: 0, y: 0, z: 0,
                roll: 0, pitch: 0, yaw: 0}
     switch(renderer.cameraMode){
