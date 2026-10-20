@@ -226,8 +226,8 @@ const Renderer = async options => {
         var rx = 0
         var ry = 0
         var rz = renderer.z //(1+fac)
-        p = Math.atan2(ry, rz) + renderer.pitch
-        d = Math.hypot(ry, rz)
+        var p = Math.atan2(ry, rz) + renderer.pitch
+        var d = Math.hypot(ry, rz)
         ry = S(p) * d
         rz = C(p) * d
         p = Math.atan2(rx, rz) - renderer.yaw
