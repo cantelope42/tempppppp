@@ -214,34 +214,70 @@ const Renderer = async options => {
                roll: 0, pitch: 0, yaw: 0}
     switch(renderer.cameraMode){
       case 'fps':
-        ret.x     = renderer.x
-        ret.y     = renderer.y
-        ret.z     = renderer.z
-        ret.roll  = renderer.roll
-        ret.pitch = renderer.pitch
-        ret.yaw   = renderer.yaw
+        ret.x     = -renderer.x
+        ret.y     = -renderer.y
+        ret.z     = -renderer.z
+        ret.roll  = -renderer.roll
+        ret.pitch = -renderer.pitch
+        ret.yaw   = -renderer.yaw
       break
       case 'default':
         
         var rx = 0
         var ry = 0
-        var rz = -renderer.z //(1+fac)
+        var rz = -renderer.z
         var p, d
-        p = Math.atan2(ry, rz) + renderer.pitch
-        d = Math.hypot(ry, rz)
-        ry = S(p) * d
-        rz = C(p) * d
-        p = Math.atan2(rx, rz) - renderer.yaw
-        d = Math.hypot(rx, rz)
-        rx = S(p) * d
-        rz = C(p) * d
+        switch(renderer.rotationMode){
+          case 0:
+            p = Math.atan2(rx, ry) - renderer.roll
+            d = Math.hypot(rx, ry)
+            rx = S(p) * d
+            ry = C(p) * d
+            p = Math.atan2(rx, rz) - renderer.yaw
+            d = Math.hypot(rx, rz)
+            rx = S(p) * d
+            rz = C(p) * d
+            p = Math.atan2(ry, rz) + renderer.pitch
+            d = Math.hypot(ry, rz)
+            ry = S(p) * d
+            rz = C(p) * d
+          break
+          case 1:
+            p = Math.atan2(ry, rz) + renderer.pitch
+            d = Math.hypot(ry, rz)
+            ry = S(p) * d
+            rz = C(p) * d
+            p = Math.atan2(rx, rz) - renderer.yaw
+            d = Math.hypot(rx, rz)
+            rx = S(p) * d
+            rz = C(p) * d
+            p = Math.atan2(rx, ry) - renderer.roll
+            d = Math.hypot(rx, ry)
+            rx = S(p) * d
+            ry = C(p) * d
+          break
+          case 2:
+            p = Math.atan2(rx, ry) - renderer.roll
+            d = Math.hypot(rx, ry)
+            rx = S(p) * d
+            ry = C(p) * d
+            p = Math.atan2(ry, rz) + renderer.pitch
+            d = Math.hypot(ry, rz)
+            ry = S(p) * d
+            rz = C(p) * d
+            p = Math.atan2(rx, rz) - renderer.yaw
+            d = Math.hypot(rx, rz)
+            rx = S(p) * d
+            rz = C(p) * d
+          break
+        }
         
         ret.x     = rx
         ret.y     = ry
         ret.z     = rz
-        ret.roll  = renderer.roll
+        ret.roll  = -renderer.roll
         ret.pitch = renderer.pitch
-        ret.yaw   = renderer.yaw
+        ret.yaw   = -renderer.yaw
       break
     }
     return ret
@@ -5179,12 +5215,12 @@ const BasicShader = async (renderer, options=[]) => {
         
         float p, d;
         if(rotationMode == 0 || isGeo == 0) {
+          pos.x = sin(p=atan(pos.x,pos.y)+rot.x)*(d=sqrt(pos.x*pos.x+pos.y*pos.y));
+          pos.y = cos(p)*d;
           pos.x = sin(p=atan(pos.x,pos.z)+rot.z)*(d=sqrt(pos.x*pos.x+pos.z*pos.z));
           pos.z = cos(p)*d;
           pos.y = sin(p=atan(pos.y,pos.z)+rot.y)*(d=sqrt(pos.y*pos.y+pos.z*pos.z));
           pos.z = cos(p)*d;
-          pos.x = sin(p=atan(pos.x,pos.y)+rot.x)*(d=sqrt(pos.x*pos.x+pos.y*pos.y));
-          pos.y = cos(p)*d;
         }
         if(rotationMode == 1 && isGeo == 1) {
           pos.y = sin(p=atan(pos.y,pos.z)+rot.y)*(d=sqrt(pos.y*pos.y+pos.z*pos.z));
