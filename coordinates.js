@@ -230,7 +230,7 @@ const Renderer = async options => {
         var d = Math.hypot(ry, rz)
         ry = S(p) * d
         rz = C(p) * d
-        p = Math.atan2(rx, rz) - renderer.yaw
+        p = Math.atan2(rx, rz) + renderer.yaw
         d = Math.hypot(rx, rz)
         rx = S(p) * d
         rz = C(p) * d
