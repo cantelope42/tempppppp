@@ -257,6 +257,20 @@ const Renderer = async options => {
             rz = C(p) * d
           break
           case 2:
+            p = Math.atan2(rx, rz) - renderer.yaw
+            d = Math.hypot(rx, rz)
+            rx = S(p) * d
+            rz = C(p) * d
+            p = Math.atan2(ry, rz) + renderer.pitch
+            d = Math.hypot(ry, rz)
+            ry = S(p) * d
+            rz = C(p) * d
+            p = Math.atan2(rx, ry) - renderer.roll
+            d = Math.hypot(rx, ry)
+            rx = S(p) * d
+            ry = C(p) * d
+          break
+          case 3:
             p = Math.atan2(rx, ry) - renderer.roll
             d = Math.hypot(rx, ry)
             rx = S(p) * d
@@ -275,9 +289,9 @@ const Renderer = async options => {
         ret.x     = rx
         ret.y     = ry
         ret.z     = rz
-        ret.roll  = -renderer.roll
+        ret.roll  = renderer.roll
         ret.pitch = renderer.pitch
-        ret.yaw   = -renderer.yaw
+        ret.yaw   = renderer.yaw
       break
     }
     return ret
@@ -5107,7 +5121,7 @@ const BasicShader = async (renderer, options=[]) => {
         if(isLine != 0.0) return pos;
         float cosa, sina, cosb, sinb, cosc, sinc;
         vec3 ret = vec3(pos.x, pos.y, pos.z);
-        if(rotationMode == 0 || isGeo == 0){
+        if(isGeo == 0){
           if(camRotationMode == 0){
             cosa = cos(-rot.x); sina = sin(-rot.x);
             cosb = cos(0.0);    sinb = sin(0.0);
@@ -5165,47 +5179,63 @@ const BasicShader = async (renderer, options=[]) => {
             ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
           }
         }
-        if(rotationMode == 1 && isGeo == 1){
-          cosa = cos(0.0);    sina = sin(0.0);
-          cosb = cos(0.0);    sinb = sin(0.0);
-          cosc = cos(rot.y);  sinc = sin(rot.y);
-          ret = pFunc(ret,    cosa, sina, cosb, sinb, cosc, sinc);
-          cosa = cos(0.0);    sina = sin(0.0);
-          cosb = cos(-rot.z); sinb = sin(-rot.z);
-          cosc = cos(0.0);    sinc = sin(0.0);
-          ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
-          cosa = cos(-rot.x); sina = sin(-rot.x);
-          cosb = cos(0.0);    sinb = sin(0.0);
-          cosc = cos(0.0);    sinc = sin(0.0);
-          ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
-        }
-        if(rotationMode == 2 && isGeo == 1){
-          cosa = cos(-rot.x); sina = sin(-rot.x);
-          cosb = cos(0.0);    sinb = sin(0.0);
-          cosc = cos(0.0);    sinc = sin(0.0);
-          ret = pFunc(ret,    cosa, sina, cosb, sinb, cosc, sinc);
-          cosa = cos(0.0);    sina = sin(0.0);
-          cosb = cos(0.0);    sinb = sin(0.0);
-          cosc = cos(rot.y);  sinc = sin(rot.y);
-          ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
-          cosa = cos(0.0);    sina = sin(0.0);
-          cosb = cos(-rot.z); sinb = sin(-rot.z);
-          cosc = cos(0.0);    sinc = sin(0.0);
-          ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
-        }
-        if(rotationMode == 3 && isGeo == 1){
-          cosa = cos(0.0);    sina = sin(0.0);
-          cosb = cos(-rot.z); sinb = sin(-rot.z);
-          cosc = cos(0.0);    sinc = sin(0.0);
-          ret = pFunc(ret,    cosa, sina, cosb, sinb, cosc, sinc);
-          cosa = cos(0.0);    sina = sin(0.0);
-          cosb = cos(0.0);    sinb = sin(0.0);
-          cosc = cos(rot.y);  sinc = sin(rot.y);
-          ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
-          cosa = cos(-rot.x); sina = sin(-rot.x);
-          cosb = cos(0.0);    sinb = sin(0.0);
-          cosc = cos(0.0);    sinc = sin(0.0);
-          ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
+        if(isGeo == 1){
+          if(rotationMode == 0){
+            cosa = cos(-rot.x); sina = sin(-rot.x);
+            cosb = cos(0.0);    sinb = sin(0.0);
+            cosc = cos(0.0);    sinc = sin(0.0);
+            ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
+            cosa = cos(0.0);    sina = sin(0.0);
+            cosb = cos(-rot.z); sinb = sin(-rot.z);
+            cosc = cos(0.0);    sinc = sin(0.0);
+            ret = pFunc(ret,    cosa, sina, cosb, sinb, cosc, sinc);
+            cosa = cos(0.0);    sina = sin(0.0);
+            cosb = cos(0.0);    sinb = sin(0.0);
+            cosc = cos(rot.y);  sinc = sin(rot.y);
+            ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
+          }
+          if(rotationMode == 1){
+            cosa = cos(0.0);    sina = sin(0.0);
+            cosb = cos(0.0);    sinb = sin(0.0);
+            cosc = cos(rot.y);  sinc = sin(rot.y);
+            ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
+            cosa = cos(0.0);    sina = sin(0.0);
+            cosb = cos(-rot.z); sinb = sin(-rot.z);
+            cosc = cos(0.0);    sinc = sin(0.0);
+            ret = pFunc(ret,    cosa, sina, cosb, sinb, cosc, sinc);
+            cosa = cos(-rot.x); sina = sin(-rot.x);
+            cosb = cos(0.0);    sinb = sin(0.0);
+            cosc = cos(0.0);    sinc = sin(0.0);
+            ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
+          }
+          if(rotationMode == 2){
+            cosa = cos(-rot.x); sina = sin(-rot.x);
+            cosb = cos(0.0);    sinb = sin(0.0);
+            cosc = cos(0.0);    sinc = sin(0.0);
+            ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
+            cosa = cos(0.0);    sina = sin(0.0);
+            cosb = cos(0.0);    sinb = sin(0.0);
+            cosc = cos(rot.y);  sinc = sin(rot.y);
+            ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
+            cosa = cos(0.0);    sina = sin(0.0);
+            cosb = cos(-rot.z); sinb = sin(-rot.z);
+            cosc = cos(0.0);    sinc = sin(0.0);
+            ret = pFunc(ret,    cosa, sina, cosb, sinb, cosc, sinc);
+          }
+          if(rotationMode == 3){
+            cosa = cos(0.0);    sina = sin(0.0);
+            cosb = cos(-rot.z); sinb = sin(-rot.z);
+            cosc = cos(0.0);    sinc = sin(0.0);
+            ret = pFunc(ret,    cosa, sina, cosb, sinb, cosc, sinc);
+            cosa = cos(0.0);    sina = sin(0.0);
+            cosb = cos(0.0);    sinb = sin(0.0);
+            cosc = cos(rot.y);  sinc = sin(rot.y);
+            ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
+            cosa = cos(-rot.x); sina = sin(-rot.x);
+            cosb = cos(0.0);    sinb = sin(0.0);
+            cosc = cos(0.0);    sinc = sin(0.0);
+            ret = pFunc(ret, cosa, sina, cosb, sinb, cosc, sinc);
+          }
         }
         return ret;
       }
