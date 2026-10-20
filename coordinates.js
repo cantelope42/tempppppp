@@ -237,7 +237,7 @@ const Renderer = async options => {
         
         ret.x     = rx
         ret.y     = ry
-        ret.z     = rz
+        ret.z     = -rz
         ret.roll  = renderer.roll
         ret.pitch = renderer.pitch
         ret.yaw   = renderer.yaw
