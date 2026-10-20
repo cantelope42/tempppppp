@@ -191,7 +191,6 @@ const Renderer = async options => {
     }
   }
   
-  
   window.addEventListener('resize', 
              rsz = e => { renderer.Resize() })
   ret = {
@@ -210,6 +209,43 @@ const Renderer = async options => {
   ret[contextType == '2d' ? 'ctx' : 'gl'] = ctx
   var renderer = ret
              
+  const ActualPosition  = () => {
+    var ret = {x: 0, y: 0, z: 0,
+               roll: 0, pitch: 0, yaw: 0}
+    switch(renderer.cameraMode){
+      case 'fps':
+        ret.x     = renderer.x
+        ret.y     = renderer.y
+        ret.z     = renderer.z
+        ret.roll  = renderer.roll
+        ret.pitch = renderer.pitch
+        ret.yaw   = renderer.yaw
+      break
+      case 'default':
+        
+        var rx = 0
+        var ry = 0
+        var rz = renderer.z //(1+fac)
+        p = Math.atan2(ry, rz) + renderer.pitch
+        d = Math.hypot(ry, rz)
+        ry = S(p) * d
+        rz = C(p) * d
+        p = Math.atan2(rx, rz) - renderer.yaw
+        d = Math.hypot(rx, rz)
+        rx = S(p) * d
+        rz = C(p) * d
+        
+        ret.x     = rx
+        ret.y     = ry
+        ret.z     = rz
+        ret.roll  = renderer.roll
+        ret.pitch = renderer.pitch
+        ret.yaw   = renderer.yaw
+      break
+    }
+    return ret
+  }
+  
   rsz()
   
   const Clear = () => {
