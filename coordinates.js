@@ -227,13 +227,13 @@ const Renderer = async options => {
         var ry = 0
         var rz = -renderer.z //(1+fac)
         var p, d
-        p = Math.atan2(rx, rz) + renderer.yaw
-        d = Math.hypot(rx, rz)
-        rx = S(p) * d
-        rz = C(p) * d
         p = Math.atan2(ry, rz) + renderer.pitch
         d = Math.hypot(ry, rz)
         ry = S(p) * d
+        rz = C(p) * d
+        p = Math.atan2(rx, rz) - renderer.yaw
+        d = Math.hypot(rx, rz)
+        rx = S(p) * d
         rz = C(p) * d
         
         ret.x     = rx
