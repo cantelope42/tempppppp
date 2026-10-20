@@ -243,6 +243,10 @@ const Renderer = async options => {
             ry = C(p) * d
           break
           case 1:
+            p = Math.atan2(rx, rz) - renderer.yaw
+            d = Math.hypot(rx, rz)
+            rx = S(p) * d
+            rz = C(p) * d
             p = Math.atan2(ry, rz) + renderer.pitch
             d = Math.hypot(ry, rz)
             ry = S(p) * d
@@ -251,10 +255,6 @@ const Renderer = async options => {
             d = Math.hypot(rx, ry)
             rx = S(p) * d
             ry = C(p) * d
-            p = Math.atan2(rx, rz) - renderer.yaw
-            d = Math.hypot(rx, rz)
-            rx = S(p) * d
-            rz = C(p) * d
           break
           case 2:
             p = Math.atan2(rx, ry) - renderer.roll
