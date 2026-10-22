@@ -9097,7 +9097,7 @@ const LoadFPSControls = async (renderer, options) => {
     })
     window.addEventListener('mousedown', e => {
       renderer.lastInteraction = renderer.t
-      if(e.button === 0) {
+      if(e.button === 0 && renderer.useKeys) {
         mbutton = true
         //jump()
         //renderer.c.requestFullscreen()
@@ -9107,7 +9107,7 @@ const LoadFPSControls = async (renderer, options) => {
     })
     window.addEventListener('mouseup', e => {
       renderer.lastInteraction = renderer.t
-      if(e.button === 0) mbutton = false
+      if(e.button === 0 && renderer.useKeys) mbutton = false
     })
     window.addEventListener('mousemove', e => {
       renderer.lastInteraction = renderer.t
@@ -9121,7 +9121,7 @@ const LoadFPSControls = async (renderer, options) => {
     })
     
     renderer.doKeys = async () => {
-
+      if(!renderer.useKeys) return
       mv = .1 * renderer.mspeed
       rv = .005 * renderer.rspeed
 
