@@ -970,13 +970,13 @@ const Renderer = async options => {
                        !cache.textures.filter(v=>v.url == geometry.map)[0].resource?.width){
 
 
-                      geometry.video = document.createElement('video')
-                      geometry.video.muted = true
-                      geometry.video.playbackRate = geometry.playbackSpeed
-                      geometry.video.defaultPlaybackRate = geometry.playbackSpeed
-                      ret.datasets.push({
+                      geometry.image = document.createElement('video')
+                      geometry.image.muted = true
+                      geometry.image.playbackRate = geometry.playbackSpeed
+                      geometry.image.defaultPlaybackRate = geometry.playbackSpeed
+                      geometry.datasets.push({
                         texture: geometry.refTexture, iURL: url })
-                      geometry.video.loop = true
+                      geometry.image.loop = true
                       if(!geometry.muted && !audioConsent) {
                         audioConsent = true
                         GenericPopup('play audio OK?', true, ()=>{
@@ -985,28 +985,28 @@ const Renderer = async options => {
                           cache.textures.filter(v=>v.url == url)[0].resource.play()
                         })
                       }
-                      geometry.video.playbackRate = geometry.video.defaultPlaybackRate = geometry.playbackSpeed
-                      geometry.video.oncanplay = async () => {
-                        geometry.video.play()
+                      geometry.image.playbackRate = geometry.image.defaultPlaybackRate = geometry.playbackSpeed
+                      geometry.image.oncanplay = async () => {
+                        geometry.image.play()
                       }
                       ctx.activeTexture(ctx.TEXTURE1)
-                      BindImage(ctx, geometry.video, geometry.refTexture, geometry.textureMode, -1, {url})
+                      BindImage(ctx, geometry.image, geometry.refTexture, geometry.textureMode, -1, {url})
                       cache.textures.push({
                         url,
-                        resource: geometry.video,
+                        resource: geometry.image,
                         texture: geometry.refTexture
                       })
                       fetch(url).then(res=>res.blob()).then(data => {
-                        geometry.video.src = URL.createObjectURL(data)
+                        geometry.image.src = URL.createObjectURL(data)
                       })
                     }
                   }else{
                     console.log('resource found in cache. using it')
                     cacheItem = cache.textures.filter(v=>v.url == geometry.map)[0]
-                    geometry.video = cacheItem.resource
+                    geometry.image = cacheItem.resource
                     dset.texture = ctx.createTexture() //cacheItem.texture
                     ctx.activeTexture(ctx.TEXTURE0)
-                    BindImage(ctx, geometry.video,
+                    BindImage(ctx, geometry.image,
                       dset.texture, geometry.textureMode, renderer.t, geometry)
                   }
                     
