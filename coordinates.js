@@ -960,6 +960,7 @@ const Renderer = async options => {
               })
               
               ctx.activeTexture(ctx.TEXTURE0)
+              var l
               let suffix = (l=geometry.map.split('.'))[l.length-1].toLowerCase()
               
               if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
