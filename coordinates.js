@@ -978,7 +978,7 @@ const Renderer = async options => {
                 case 'video': 
                   if(geometry.rebindTextures){
                     geometry.rebindTextures = false
-                    if(involveCache && (cacheItem=cache.textures.filter(v=>v.url == dset.iURL)).length){
+                    if(geometry.involveCache && (cacheItem=cache.textures.filter(v=>v.url == dset.iURL)).length){
                       console.log('found video in cache... using it')
                       dset.resource = cacheItem[0].resource
                       //dset.resource.playbackRate = dset.resource.defaultPlaybackRate = geometry.playbackSpeed
