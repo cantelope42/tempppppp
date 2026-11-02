@@ -969,20 +969,20 @@ const Renderer = async options => {
                     if(cache.textures.filter(v=>v.url == geometry.map).length == 0 ||
                        !cache.textures.filter(v=>v.url == geometry.map)[0].resource?.width){
 
-
                       geometry.image = document.createElement('video')
                       geometry.image.muted = true
                       geometry.image.playbackRate = geometry.playbackSpeed
                       geometry.image.defaultPlaybackRate = geometry.playbackSpeed
-                      geometry.datasets.push({
-                        texture: geometry.refTexture, iURL: url })
+                      console.log(geometry)
+                      geometry.shader.datasets.push({
+                        texture: geometry.refTexture, iURL: geometry.map })
                       geometry.image.loop = true
                       if(!geometry.muted && !audioConsent) {
                         audioConsent = true
                         GenericPopup('play audio OK?', true, ()=>{
-                          cache.textures.filter(v=>v.url == url)[0].resource.muted = false
-                          cache.textures.filter(v=>v.url == url)[0].resource.currentTime = 0
-                          cache.textures.filter(v=>v.url == url)[0].resource.play()
+                          cache.textures.filter(v=>v.url == geometry.map)[0].resource.muted = false
+                          cache.textures.filter(v=>v.url == geometry.map)[0].resource.currentTime = 0
+                          cache.textures.filter(v=>v.url == geometry.map)[0].resource.play()
                         })
                       }
                       geometry.image.playbackRate = geometry.image.defaultPlaybackRate = geometry.playbackSpeed
