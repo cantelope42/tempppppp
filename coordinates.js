@@ -1001,14 +1001,13 @@ const Renderer = async options => {
                       })
                     }
                   }else{
-                      console.log('resource found in cache. using it')
-                      cacheItem = cache.textures.filter(v=>v.url == geometry.map)[0]
-                      geometry.video = cacheItem.resource
-                      dset.texture = ctx.createTexture() //cacheItem.texture
-                      ctx.activeTexture(ctx.TEXTURE0)
-                      BindImage(ctx, geometry.video,
-                        dset.texture, geometry.textureMode, renderer.t, geometry)
-                    }
+                    console.log('resource found in cache. using it')
+                    cacheItem = cache.textures.filter(v=>v.url == geometry.map)[0]
+                    geometry.video = cacheItem.resource
+                    dset.texture = ctx.createTexture() //cacheItem.texture
+                    ctx.activeTexture(ctx.TEXTURE0)
+                    BindImage(ctx, geometry.video,
+                      dset.texture, geometry.textureMode, renderer.t, geometry)
                   }
                     
 
