@@ -996,7 +996,7 @@ const Renderer = async options => {
                         resource: geometry.video,
                         texture: geometry.refTexture
                       })
-                      await fetch(url).then(res=>res.blob()).then(data => {
+                      fetch(url).then(res=>res.blob()).then(data => {
                         geometry.video.src = URL.createObjectURL(data)
                       })
                     }
