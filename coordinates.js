@@ -1008,11 +1008,11 @@ const Renderer = async options => {
                       //gl.activeTexture(gl.TEXTURE0)
                       //BindImage(gl, dset.resource, dset.texture, geometry.textureMode, -1, {map: textureURL})
                       cache.textures.push({
-                        url: textureURL,
+                        url: geometry.map,
                         resource: dset.resource,
                         texture: dset.texture
                       })
-                      fetch(textureURL).then(res=>res.blob()).then(data => {
+                      fetch(geometry.map).then(res=>res.blob()).then(data => {
                         dset.resource.src = URL.createObjectURL(data)
                       })
                     }
