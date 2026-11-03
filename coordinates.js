@@ -3883,6 +3883,7 @@ const InitPartitioning = geometry => {
 
 const BindImage = (gl, resource, binding, textureMode='image', tval=-1, geometry={}, involveCache = true) => {
   let texImage
+  console.log(geometry.name, resource, binding, textureMode, tval, geometry, involveCache)
   switch(textureMode){
     case 'canvas': case 'heightImage':
       texImage = resource
