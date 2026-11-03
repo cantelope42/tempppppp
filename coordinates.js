@@ -739,6 +739,17 @@ const Renderer = async options => {
 
               dset.optionalUniforms.map((uniform) => {
                 if(uniform.enabled){
+                  var l
+                  let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
+                  if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
+                     suffix == 'mkv' || suffix == 'ogv'){
+                    uniform.textureMode = 'video'
+                  }
+                  if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
+                     suffix == 'png' || suffix == 'bmp'){
+                    uniform.textureMode = 'image'
+                  }
+                  if(uniform.omap != uniform.map) uniform.rebindTextures = true
                   if(typeof uniform?.loc === 'object'){
                     if(uniform.dataType == 'uniform4f'){
                       ctx[uniform.dataType](uniform.loc, ...uniform.value)
@@ -761,18 +772,6 @@ const Renderer = async options => {
                           ctx.bindTexture(ctx.TEXTURE_2D, uniform.refTexture)
                           BindImage(ctx, uniform.canvasTexture,  uniform.refTexture,'canvas', renderer.t, uniform)
                         }else{
-                          var l
-                          let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
-                          
-                          if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
-                             suffix == 'mkv' || suffix == 'ogv'){
-                            uniform.textureMode = 'video'
-                          }
-                          if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
-                             suffix == 'png' || suffix == 'bmp'){
-                            uniform.textureMode = 'image'
-                          }
-                          if(uniform.omap != uniform.map) uniform.rebindTextures = true
                           if(uniform.textureMode == 'image' && uniform.rebindTextures){
                             uniform.rebindTextures = false
                             uniform.omap = uniform.map
@@ -835,8 +834,8 @@ const Renderer = async options => {
                                 uniform.video.oncanplay = async () => {
                                   uniform.video.play()
                                 }
-                                //gl.activeTexture(gl.TEXTURE0)
-                                //BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                gl.activeTexture(gl.TEXTURE0)
+                                BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -847,7 +846,7 @@ const Renderer = async options => {
                                 })
                               }
                           
-                              BindImage(ctx, uniform.video,  uniform.refTexture, uniform.textureMode, renderer.t, uniform)
+                              //BindImage(ctx, uniform.video,  uniform.refTexture, uniform.textureMode, renderer.t, uniform)
                             }
                           }
                         }
@@ -870,17 +869,6 @@ const Renderer = async options => {
                           ctx.bindTexture(ctx.TEXTURE_2D, uniform.refractionTexture)
                           BindImage(ctx, uniform.canvasTexture,  uniform.refractionTexture, 'canvas', renderer.t, uniform)
                         }else{
-                          var l
-                          let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
-                          if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
-                             suffix == 'mkv' || suffix == 'ogv'){
-                            uniform.textureMode = 'video'
-                          }
-                          if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
-                             suffix == 'png' || suffix == 'bmp'){
-                            uniform.textureMode = 'image'
-                          }
-                          if(uniform.omap != uniform.map) uniform.rebindTextures = true
                           if(uniform.textureMode == 'image' && uniform.rebindTextures){
                             uniform.rebindTextures = false
                             uniform.omap = uniform.map
@@ -982,18 +970,6 @@ const Renderer = async options => {
                           ctx.bindTexture(ctx.TEXTURE_2D, uniform.refraction2Texture)
                           BindImage(ctx, uniform.canvasTexture,  uniform.refraction2Texture, 'canvas', renderer.t, uniform)
                         }else{
-                          var l
-                          let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
-                          
-                          if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
-                             suffix == 'mkv' || suffix == 'ogv'){
-                            uniform.textureMode = 'video'
-                          }
-                          if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
-                             suffix == 'png' || suffix == 'bmp'){
-                            uniform.textureMode = 'image'
-                          }
-                          if(uniform.omap != uniform.map) uniform.rebindTextures = true
                           if(uniform.textureMode == 'image' && uniform.rebindTextures){
                             uniform.rebindTextures = false
                             uniform.omap = uniform.map
@@ -1183,8 +1159,8 @@ const Renderer = async options => {
                         dset.resource.src = URL.createObjectURL(data)
                       })
                     }
+                    BindImage(ctx, dset.resource,  dset.texture, geometry.textureMode, renderer.t, geometry)
                   }
-                  BindImage(ctx, dset.resource,  dset.texture, geometry.textureMode, renderer.t, geometry)
                 break
                 case 'canvas':
                   ctx.activeTexture(ctx.TEXTURE2)
@@ -3883,7 +3859,7 @@ const InitPartitioning = geometry => {
 
 const BindImage = (gl, resource, binding, textureMode='image', tval=-1, geometry={}, involveCache = true) => {
   let texImage
-  console.log(geometry.name, resource, binding, textureMode, tval, geometry, involveCache)
+  //console.log(geometry.name, resource, binding, textureMode, tval, geometry, involveCache)
   switch(textureMode){
     case 'canvas': case 'heightImage':
       texImage = resource
