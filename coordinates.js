@@ -846,9 +846,9 @@ const Renderer = async options => {
                                   uniform.video.src = URL.createObjectURL(data)
                                 })
                               }
-                          
-                              BindImage(ctx, uniform.video,  uniform.refTexture, uniform.textureMode, renderer.t, uniform)
                             }
+                          
+                            BindImage(ctx, uniform.video,  uniform.refTexture, uniform.textureMode, renderer.t, uniform)
                           }
                         }
                         ctx.activeTexture(ctx.TEXTURE1)
@@ -954,8 +954,8 @@ const Renderer = async options => {
                                   uniform.video.src = URL.createObjectURL(data)
                                 })
                               }
-                              BindImage(ctx, uniform.video,  uniform.refractionTexture, uniform.textureMode, renderer.t, uniform)
                             }
+                            BindImage(ctx, uniform.video,  uniform.refractionTexture, uniform.textureMode, renderer.t, uniform)
                           }
                         }
                         ctx.activeTexture(ctx.TEXTURE5)
@@ -1067,8 +1067,8 @@ const Renderer = async options => {
                                   uniform.video.src = URL.createObjectURL(data)
                                 })
                               }
-                              BindImage(ctx, uniform.video,  uniform.refraction2Texture, uniform.textureMode, renderer.t, uniform)
                             }
+                            BindImage(ctx, uniform.video,  uniform.refraction2Texture, uniform.textureMode, renderer.t, uniform)
                           }
                         }
                         ctx.activeTexture(ctx.TEXTURE6)
@@ -3883,7 +3883,7 @@ const InitPartitioning = geometry => {
 
 const BindImage = (gl, resource, binding, textureMode='image', tval=-1, geometry={}, involveCache = true) => {
   let texImage
-  //console.log(geometry.name, resource, binding, textureMode, tval, geometry, involveCache)
+  console.log(geometry.name, resource, binding, textureMode, tval, geometry, involveCache)
   switch(textureMode){
     case 'canvas': case 'heightImage':
       texImage = resource
