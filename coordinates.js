@@ -782,7 +782,7 @@ const Renderer = async options => {
                               fetch(uniform.map).then(res=>res.blob()).then(data => {
                                 image.src = URL.createObjectURL(data)
                               })
-                              
+                              uniform.omap = uniform.map
                             }else{
                               console.log('resource found in cache. using it')
                               cacheItem = cache.textures.filter(v=>v.url == uniform.map)[0]
