@@ -814,8 +814,8 @@ const Renderer = async options => {
                                 uniform.video = cacheItem[0].resource
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
-                                ctx.activeTexture(ctx.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
+                                //ctx.activeTexture(ctx.TEXTURE0)
+                                //BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                               }else{
                                 uniform.video = document.createElement('video')
                                 uniform.video.muted = true
@@ -911,8 +911,8 @@ const Renderer = async options => {
                                 uniform.video = cacheItem[0].resource
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
-                                ctx.activeTexture(ctx.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
+                                //ctx.activeTexture(ctx.TEXTURE0)
+                                //BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                               }else{
                                 uniform.video = document.createElement('video')
                                 uniform.video.muted = true
@@ -933,8 +933,8 @@ const Renderer = async options => {
                                 uniform.video.oncanplay = async () => {
                                   uniform.video.play()
                                 }
-                                ctx.activeTexture(ctx.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
+                                //ctx.activeTexture(ctx.TEXTURE0)
+                                //BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -944,7 +944,7 @@ const Renderer = async options => {
                                   uniform.video.src = URL.createObjectURL(data)
                                 })
                               }
-                              //BindImage(ctx, uniform.video,  uniform.refractionTexture, uniform.textureMode, renderer.t, uniform)
+                              BindImage(ctx, uniform.video,  uniform.refractionTexture, uniform.textureMode, renderer.t, uniform)
                             }
                           }
                         }
@@ -1012,8 +1012,8 @@ const Renderer = async options => {
                                 uniform.video = cacheItem[0].resource
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
-                                ctx.activeTexture(ctx.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
+                                //ctx.activeTexture(ctx.TEXTURE0)
+                                //BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                               }else{
                                 uniform.video = document.createElement('video')
                                 uniform.video.muted = true
@@ -1034,8 +1034,8 @@ const Renderer = async options => {
                                 uniform.video.oncanplay = async () => {
                                   uniform.video.play()
                                 }
-                                ctx.activeTexture(ctx.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
+                                //ctx.activeTexture(ctx.TEXTURE0)
+                                //BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -1045,7 +1045,7 @@ const Renderer = async options => {
                                   uniform.video.src = URL.createObjectURL(data)
                                 })
                               }
-                              //BindImage(ctx, uniform.video,  uniform.refraction2Texture, uniform.textureMode, renderer.t, uniform)
+                              BindImage(ctx, uniform.video,  uniform.refraction2Texture, uniform.textureMode, renderer.t, uniform)
                             }
                           }
                         }
@@ -1127,8 +1127,8 @@ const Renderer = async options => {
                       dset.resource = cacheItem[0].resource
                       //dset.resource.playbackRate = dset.resource.defaultPlaybackRate = geometry.playbackSpeed
                       dset.texture = cacheItem[0].texture
-                      ctx.activeTexture(ctx.TEXTURE0)
-                      BindImage(ctx, dset.resource, dset.texture, geometry.textureMode, -1, {map: textureURL})
+                      //ctx.activeTexture(ctx.TEXTURE0)
+                      //BindImage(ctx, dset.resource, dset.texture, geometry.textureMode, -1, geometry)
                     }else{
                       dset.resource = document.createElement('video')
                       dset.resource.muted = true
@@ -1160,7 +1160,7 @@ const Renderer = async options => {
                         dset.resource.src = URL.createObjectURL(data)
                       })
                     }
-                    //BindImage(ctx, dset.resource,  dset.texture, geometry.textureMode, renderer.t, geometry)
+                    BindImage(ctx, dset.resource,  dset.texture, geometry.textureMode, renderer.t, geometry)
                   }
                 break
                 case 'canvas':
