@@ -836,8 +836,8 @@ const Renderer = async options => {
                                 uniform.video.oncanplay = async () => {
                                   uniform.video.play()
                                 }
-                                gl.activeTexture(gl.TEXTURE0)
-                                BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                //gl.activeTexture(gl.TEXTURE0)
+                                //BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -848,7 +848,7 @@ const Renderer = async options => {
                                 })
                               }
                           
-                              //BindImage(ctx, uniform.video,  uniform.refTexture, uniform.textureMode, renderer.t, uniform)
+                              BindImage(ctx, uniform.video,  uniform.refTexture, uniform.textureMode, renderer.t, uniform)
                             }
                           }
                         }
