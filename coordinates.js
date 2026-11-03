@@ -814,8 +814,8 @@ const Renderer = async options => {
                                 uniform.video = cacheItem[0].resource
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
-                                //gl.activeTexture(gl.TEXTURE0)
-                                BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                ctx.activeTexture(ctx.TEXTURE0)
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                               }else{
                                 uniform.video = document.createElement('video')
                                 uniform.video.muted = true
@@ -836,8 +836,8 @@ const Renderer = async options => {
                                 uniform.video.oncanplay = async () => {
                                   uniform.video.play()
                                 }
-                                //gl.activeTexture(gl.TEXTURE0)
-                                //BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                ctx.activeTexture(gl.TEXTURE0)
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -911,8 +911,8 @@ const Renderer = async options => {
                                 uniform.video = cacheItem[0].resource
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
-                                gl.activeTexture(gl.TEXTURE0)
-                                BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                ctx.activeTexture(ctx.TEXTURE0)
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                               }else{
                                 uniform.video = document.createElement('video')
                                 uniform.video.muted = true
@@ -933,8 +933,8 @@ const Renderer = async options => {
                                 uniform.video.oncanplay = async () => {
                                   uniform.video.play()
                                 }
-                                gl.activeTexture(gl.TEXTURE0)
-                                BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                ctx.activeTexture(ctx.TEXTURE0)
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -1012,8 +1012,8 @@ const Renderer = async options => {
                                 uniform.video = cacheItem[0].resource
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
-                                gl.activeTexture(gl.TEXTURE0)
-                                BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                ctx.activeTexture(ctx.TEXTURE0)
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                               }else{
                                 uniform.video = document.createElement('video')
                                 uniform.video.muted = true
@@ -1034,8 +1034,8 @@ const Renderer = async options => {
                                 uniform.video.oncanplay = async () => {
                                   uniform.video.play()
                                 }
-                                gl.activeTexture(gl.TEXTURE0)
-                                BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                ctx.activeTexture(ctx.TEXTURE0)
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -1127,7 +1127,7 @@ const Renderer = async options => {
                       dset.resource = cacheItem[0].resource
                       //dset.resource.playbackRate = dset.resource.defaultPlaybackRate = geometry.playbackSpeed
                       dset.texture = cacheItem[0].texture
-                      //gl.activeTexture(gl.TEXTURE0)
+                      gl.activeTexture(gl.TEXTURE0)
                       BindImage(gl, dset.resource, dset.texture, geometry.textureMode, -1, {map: textureURL})
                     }else{
                       dset.resource = document.createElement('video')
@@ -1149,8 +1149,8 @@ const Renderer = async options => {
                       dset.resource.oncanplay = async () => {
                         dset.resource.play()
                       }
-                      //gl.activeTexture(gl.TEXTURE0)
-                      //BindImage(gl, dset.resource, dset.texture, geometry.textureMode, -1, {map: textureURL})
+                      gl.activeTexture(gl.TEXTURE0)
+                      BindImage(ctx, dset.resource, dset.texture, geometry.textureMode, -1, {map: textureURL})
                       cache.textures.push({
                         url: geometry.map,
                         resource: dset.resource,
@@ -1160,7 +1160,7 @@ const Renderer = async options => {
                         dset.resource.src = URL.createObjectURL(data)
                       })
                     }
-                    BindImage(ctx, dset.resource,  dset.texture, geometry.textureMode, renderer.t, geometry)
+                    //BindImage(ctx, dset.resource,  dset.texture, geometry.textureMode, renderer.t, geometry)
                   }
                 break
                 case 'canvas':
