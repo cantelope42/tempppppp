@@ -761,8 +761,10 @@ const Renderer = async options => {
                           ctx.bindTexture(ctx.TEXTURE_2D, uniform.refTexture)
                           BindImage(ctx, uniform.canvasTexture,  uniform.refTexture,'canvas', renderer.t, uniform)
                         }else{
+                          if(uniform.omap != uniform.map) uniform.rebindTextures = true
                           if(uniform.textureMode == 'image' && uniform.rebindTextures){
                             uniform.rebindTextures = false
+                            uniform.omap = uniform.map
                             console.log('rebinding reflection texture')
                             if(cache.textures.filter(v=>v.url == uniform.map).length == 0 ||
                                !cache.textures.filter(v=>v.url == uniform.map)[0].resource?.width){
@@ -782,7 +784,6 @@ const Renderer = async options => {
                               fetch(uniform.map).then(res=>res.blob()).then(data => {
                                 image.src = URL.createObjectURL(data)
                               })
-                              uniform.omap = uniform.map
                             }else{
                               console.log('resource found in cache. using it')
                               cacheItem = cache.textures.filter(v=>v.url == uniform.map)[0]
