@@ -761,6 +761,17 @@ const Renderer = async options => {
                           ctx.bindTexture(ctx.TEXTURE_2D, uniform.refTexture)
                           BindImage(ctx, uniform.canvasTexture,  uniform.refTexture,'canvas', renderer.t, uniform)
                         }else{
+                          var l
+                          let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
+                          
+                          if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
+                             suffix == 'mkv' || suffix == 'ogv'){
+                            uniform.textureMode = 'video'
+                          }
+                          if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
+                             suffix == 'png' || suffix == 'bmp'){
+                            uniform.textureMode = 'image'
+                          }
                           if(uniform.omap != uniform.map) uniform.rebindTextures = true
                           if(uniform.textureMode == 'image' && uniform.rebindTextures){
                             uniform.rebindTextures = false
@@ -793,19 +804,6 @@ const Renderer = async options => {
                                 uniform.refTexture, uniform.textureMode, renderer.t, uniform)
                             }
                           }
-                          
-                          var l
-                          let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
-                          
-                          if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
-                             suffix == 'mkv' || suffix == 'ogv'){
-                            uniform.textureMode = 'video'
-                          }
-                          if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
-                             suffix == 'png' || suffix == 'bmp'){
-                            uniform.textureMode = 'image'
-                          }
-                          if(uniform.omap != uniform.map) uniform.rebindTextures = true
                           if(uniform.textureMode == 'video'){
                             if(uniform.rebindTextures){
                               uniform.omap = uniform.map
@@ -872,9 +870,17 @@ const Renderer = async options => {
                           ctx.bindTexture(ctx.TEXTURE_2D, uniform.refractionTexture)
                           BindImage(ctx, uniform.canvasTexture,  uniform.refractionTexture, 'canvas', renderer.t, uniform)
                         }else{
-                          if(uniform.omap != uniform.map){
-                            uniform.rebindTextures = true
+                          var l
+                          let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
+                          if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
+                             suffix == 'mkv' || suffix == 'ogv'){
+                            uniform.textureMode = 'video'
                           }
+                          if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
+                             suffix == 'png' || suffix == 'bmp'){
+                            uniform.textureMode = 'image'
+                          }
+                          if(uniform.omap != uniform.map) uniform.rebindTextures = true
                           if(uniform.textureMode == 'image' && uniform.rebindTextures){
                             uniform.rebindTextures = false
                             uniform.omap = uniform.map
@@ -906,17 +912,6 @@ const Renderer = async options => {
                                 uniform.refractionTexture, uniform.textureMode, renderer.t, uniform)
                             }
                           }
-                          var l
-                          let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
-                          if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
-                             suffix == 'mkv' || suffix == 'ogv'){
-                            uniform.textureMode = 'video'
-                          }
-                          if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
-                             suffix == 'png' || suffix == 'bmp'){
-                            uniform.textureMode = 'image'
-                          }
-                          if(uniform.omap != uniform.map) uniform.rebindTextures = true
                           if(uniform.textureMode == 'video'){
                             if(uniform.rebindTextures){
                               uniform.omap = uniform.map
@@ -987,6 +982,17 @@ const Renderer = async options => {
                           ctx.bindTexture(ctx.TEXTURE_2D, uniform.refraction2Texture)
                           BindImage(ctx, uniform.canvasTexture,  uniform.refraction2Texture, 'canvas', renderer.t, uniform)
                         }else{
+                          var l
+                          let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
+                          
+                          if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
+                             suffix == 'mkv' || suffix == 'ogv'){
+                            uniform.textureMode = 'video'
+                          }
+                          if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
+                             suffix == 'png' || suffix == 'bmp'){
+                            uniform.textureMode = 'image'
+                          }
                           if(uniform.omap != uniform.map) uniform.rebindTextures = true
                           if(uniform.textureMode == 'image' && uniform.rebindTextures){
                             uniform.rebindTextures = false
@@ -1019,19 +1025,6 @@ const Renderer = async options => {
                                 uniform.refraction2Texture, uniform.textureMode, renderer.t, uniform)
                             }
                           }
-
-                          var l
-                          let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
-                          
-                          if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
-                             suffix == 'mkv' || suffix == 'ogv'){
-                            uniform.textureMode = 'video'
-                          }
-                          if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
-                             suffix == 'png' || suffix == 'bmp'){
-                            uniform.textureMode = 'image'
-                          }
-                          if(uniform.omap != uniform.map) uniform.rebindTextures = true
                           if(uniform.textureMode == 'video'){
                             if(uniform.rebindTextures){
                               uniform.rebindTextures = false
@@ -1131,6 +1124,17 @@ const Renderer = async options => {
               })
               
               ctx.activeTexture(ctx.TEXTURE0)
+              var l
+              let suffix = (l=geometry.map.split('.'))[l.length-1].toLowerCase()
+              
+              if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
+                 suffix == 'mkv' || suffix == 'ogv'){
+                geometry.textureMode = 'video'
+              }
+              if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
+                 suffix == 'png' || suffix == 'bmp'){
+                geometry.textureMode = 'image'
+              }
               var l
               let suffix = (l=geometry.map.split('.'))[l.length-1].toLowerCase()
               
