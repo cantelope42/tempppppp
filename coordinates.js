@@ -911,7 +911,7 @@ const Renderer = async options => {
                                 uniform.video = cacheItem[0].resource
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
-                                //gl.activeTexture(gl.TEXTURE0)
+                                gl.activeTexture(gl.TEXTURE0)
                                 BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                               }else{
                                 uniform.video = document.createElement('video')
@@ -933,8 +933,8 @@ const Renderer = async options => {
                                 uniform.video.oncanplay = async () => {
                                   uniform.video.play()
                                 }
-                                //gl.activeTexture(gl.TEXTURE0)
-                                //BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                gl.activeTexture(gl.TEXTURE0)
+                                BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -944,7 +944,7 @@ const Renderer = async options => {
                                   uniform.video.src = URL.createObjectURL(data)
                                 })
                               }
-                              BindImage(ctx, uniform.video,  uniform.refractionTexture, uniform.textureMode, renderer.t, uniform)
+                              //BindImage(ctx, uniform.video,  uniform.refractionTexture, uniform.textureMode, renderer.t, uniform)
                             }
                           }
                         }
@@ -1012,7 +1012,7 @@ const Renderer = async options => {
                                 uniform.video = cacheItem[0].resource
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
-                                //gl.activeTexture(gl.TEXTURE0)
+                                gl.activeTexture(gl.TEXTURE0)
                                 BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                               }else{
                                 uniform.video = document.createElement('video')
@@ -1034,8 +1034,8 @@ const Renderer = async options => {
                                 uniform.video.oncanplay = async () => {
                                   uniform.video.play()
                                 }
-                                //gl.activeTexture(gl.TEXTURE0)
-                                //BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                gl.activeTexture(gl.TEXTURE0)
+                                BindImage(gl, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -1045,7 +1045,7 @@ const Renderer = async options => {
                                   uniform.video.src = URL.createObjectURL(data)
                                 })
                               }
-                              BindImage(ctx, uniform.video,  uniform.refraction2Texture, uniform.textureMode, renderer.t, uniform)
+                              //BindImage(ctx, uniform.video,  uniform.refraction2Texture, uniform.textureMode, renderer.t, uniform)
                             }
                           }
                         }
@@ -1113,7 +1113,6 @@ const Renderer = async options => {
                  suffix == 'png' || suffix == 'bmp'){
                 geometry.textureMode = 'image'
               }
-              var l
               if(geometry.omap != geometry.map) geometry.rebindTextures = true
               switch(geometry.textureMode){
                 case 'dataArray':
