@@ -1136,16 +1136,6 @@ const Renderer = async options => {
                 geometry.textureMode = 'image'
               }
               var l
-              let suffix = (l=geometry.map.split('.'))[l.length-1].toLowerCase()
-              
-              if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
-                 suffix == 'mkv' || suffix == 'ogv'){
-                geometry.textureMode = 'video'
-              }
-              if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
-                 suffix == 'png' || suffix == 'bmp'){
-                geometry.textureMode = 'image'
-              }
               if(geometry.omap != geometry.map) geometry.rebindTextures = true
               switch(geometry.textureMode){
                 case 'dataArray':
