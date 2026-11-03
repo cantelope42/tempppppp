@@ -1149,7 +1149,7 @@ const Renderer = async options => {
                       dset.resource.oncanplay = async () => {
                         dset.resource.play()
                       }
-                      gl.activeTexture(gl.TEXTURE0)
+                      ctx.activeTexture(ctx.TEXTURE0)
                       BindImage(ctx, dset.resource, dset.texture, geometry.textureMode, -1, {map: textureURL})
                       cache.textures.push({
                         url: geometry.map,
