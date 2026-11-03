@@ -739,17 +739,19 @@ const Renderer = async options => {
 
               dset.optionalUniforms.map((uniform) => {
                 if(uniform.enabled){
-                  var l
-                  let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
-                  if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
-                     suffix == 'mkv' || suffix == 'ogv'){
-                    uniform.textureMode = 'video'
+                  if(typeof uniform?.map != 'undefined'){
+                    var l
+                    let suffix = (l=uniform.map.split('.'))[l.length-1].toLowerCase()
+                    if(suffix == 'mp4' || suffix == 'webm' || suffix == 'avi' ||
+                       suffix == 'mkv' || suffix == 'ogv'){
+                      uniform.textureMode = 'video'
+                    }
+                    if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
+                       suffix == 'png' || suffix == 'bmp'){
+                      uniform.textureMode = 'image'
+                    }
+                    if(uniform.omap != uniform.map) uniform.rebindTextures = true
                   }
-                  if(suffix == 'jpg' || suffix == 'webp' || suffix == 'gif' ||
-                     suffix == 'png' || suffix == 'bmp'){
-                    uniform.textureMode = 'image'
-                  }
-                  if(uniform.omap != uniform.map) uniform.rebindTextures = true
                   if(typeof uniform?.loc === 'object'){
                     if(uniform.dataType == 'uniform4f'){
                       ctx[uniform.dataType](uniform.loc, ...uniform.value)
