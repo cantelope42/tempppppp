@@ -815,7 +815,7 @@ const Renderer = async options => {
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
                                 ctx.activeTexture(ctx.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                               }else{
                                 uniform.video = document.createElement('video')
                                 uniform.video.muted = true
@@ -837,7 +837,7 @@ const Renderer = async options => {
                                   uniform.video.play()
                                 }
                                 ctx.activeTexture(gl.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -912,7 +912,7 @@ const Renderer = async options => {
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
                                 ctx.activeTexture(ctx.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                               }else{
                                 uniform.video = document.createElement('video')
                                 uniform.video.muted = true
@@ -934,7 +934,7 @@ const Renderer = async options => {
                                   uniform.video.play()
                                 }
                                 ctx.activeTexture(ctx.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -1013,7 +1013,7 @@ const Renderer = async options => {
                                 //uniform.video.playbackRate = uniform.video.defaultPlaybackRate = uniform.playbackSpeed
                                 dset.texture = cacheItem[0].texture
                                 ctx.activeTexture(ctx.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                               }else{
                                 uniform.video = document.createElement('video')
                                 uniform.video.muted = true
@@ -1035,7 +1035,7 @@ const Renderer = async options => {
                                   uniform.video.play()
                                 }
                                 ctx.activeTexture(ctx.TEXTURE0)
-                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, {map: textureURL})
+                                BindImage(ctx, uniform.video, dset.texture, uniform.textureMode, -1, uniform)
                                 cache.textures.push({
                                   url: uniform.map,
                                   resource: uniform.video,
@@ -1150,7 +1150,7 @@ const Renderer = async options => {
                         dset.resource.play()
                       }
                       ctx.activeTexture(ctx.TEXTURE0)
-                      BindImage(ctx, dset.resource, dset.texture, geometry.textureMode, -1, {map: textureURL})
+                      BindImage(ctx, dset.resource, dset.texture, geometry.textureMode, -1, geometry)
                       cache.textures.push({
                         url: geometry.map,
                         resource: dset.resource,
