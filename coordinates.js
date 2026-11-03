@@ -846,9 +846,9 @@ const Renderer = async options => {
                                   uniform.video.src = URL.createObjectURL(data)
                                 })
                               }
-                            }
                           
-                            BindImage(ctx, uniform.video,  uniform.refTexture, uniform.textureMode, renderer.t, uniform)
+                              BindImage(ctx, uniform.video,  uniform.refTexture, uniform.textureMode, renderer.t, uniform)
+                            }
                           }
                         }
                         ctx.activeTexture(ctx.TEXTURE1)
@@ -954,8 +954,8 @@ const Renderer = async options => {
                                   uniform.video.src = URL.createObjectURL(data)
                                 })
                               }
+                              BindImage(ctx, uniform.video,  uniform.refractionTexture, uniform.textureMode, renderer.t, uniform)
                             }
-                            BindImage(ctx, uniform.video,  uniform.refractionTexture, uniform.textureMode, renderer.t, uniform)
                           }
                         }
                         ctx.activeTexture(ctx.TEXTURE5)
@@ -1067,8 +1067,8 @@ const Renderer = async options => {
                                   uniform.video.src = URL.createObjectURL(data)
                                 })
                               }
+                              BindImage(ctx, uniform.video,  uniform.refraction2Texture, uniform.textureMode, renderer.t, uniform)
                             }
-                            BindImage(ctx, uniform.video,  uniform.refraction2Texture, uniform.textureMode, renderer.t, uniform)
                           }
                         }
                         ctx.activeTexture(ctx.TEXTURE6)
