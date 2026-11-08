@@ -2745,24 +2745,26 @@ const LoadGeometry = async (renderer, geoOptions) => {
                 do{ ct++ }while(brk=='PK');
               })
             }else{
-              await fetch(fileURL).then(res=>res.json()).then(data=>{
-                if(data?.normalAssocs) normalAssocs = data.normalAssocs
-                if(data?.flatShadingNormalVecs) flatShadingNormalVecs = data.flatShadingNormalVecs
-                vertices     = data.vertices
-                normals      = data.normals
-                normalVecs   = data.normalVecs
-                uvs          = data.uvs
-                if(data?.stride) stride = data.stride
-                if(data?.fsnvstate) fsnvstate= data.shapeData.map(v=>v)
-                if(data?.shapeData) {
-                  isShapeArray = true
-                  shapeData = data.shapeData.map(v=>v)
-                }
-                if(data?.vstate) vstate = data.vstate.map(v=>v)
-                if(data?.nvstate) nvstate = data.nvstate.map(v=>v)
-                resolved     = true
-                cache.customShapes.push({data: structuredClone(data), url})
-              })
+              if(typeof fileURL != 'undefined'){
+                await fetch(fileURL).then(res=>res.json()).then(data=>{
+                  if(data?.normalAssocs) normalAssocs = data.normalAssocs
+                  if(data?.flatShadingNormalVecs) flatShadingNormalVecs = data.flatShadingNormalVecs
+                  vertices     = data.vertices
+                  normals      = data.normals
+                  normalVecs   = data.normalVecs
+                  uvs          = data.uvs
+                  if(data?.stride) stride = data.stride
+                  if(data?.fsnvstate) fsnvstate= data.shapeData.map(v=>v)
+                  if(data?.shapeData) {
+                    isShapeArray = true
+                    shapeData = data.shapeData.map(v=>v)
+                  }
+                  if(data?.vstate) vstate = data.vstate.map(v=>v)
+                  if(data?.nvstate) nvstate = data.nvstate.map(v=>v)
+                  resolved     = true
+                  cache.customShapes.push({data: structuredClone(data), url})
+                })
+              }
             }
           }
         }
