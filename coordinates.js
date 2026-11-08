@@ -2613,7 +2613,7 @@ const LoadGeometry = async (renderer, geoOptions) => {
                   uvs      = shape.uvs
                   normalVecs = []
                   for(var i = 0; i < vertices.length; i++){
-                    vertices[i] *= size
+                    vertices[i] *= size/2
                   }
                   for(var i = 0; i < normals.length; i += 6){
                     var x = normals[i+3] - normals[i+0]
