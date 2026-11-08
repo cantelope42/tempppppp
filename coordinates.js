@@ -2712,7 +2712,7 @@ const LoadGeometry = async (renderer, geoOptions) => {
             resolved    = true
             //cache.customShapes.push({data: structuredClone(geometryData), url})
           }else{
-            if(fileURL.toLowerCase().substr(fileURL.length-4) == '.zip'){
+            if(fileURL?.toLowerCase().substr(fileURL.length-4) == '.zip'){
               var brk = 'PK'
               await fetch(fileURL).then(res=>res.blob()).then(async data => {
                 ;await (new zip.ZipReader(await new zip.BlobReader(data))).getEntries()
