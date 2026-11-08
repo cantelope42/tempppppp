@@ -2607,10 +2607,19 @@ const LoadGeometry = async (renderer, geoOptions) => {
             }else{
               switch(shapeType){
                 case 'obj':
-                  shape = await LoadOBJ(fileURL, size, 0,0,0,0,0,0, false, true)
+                  shape = await LoadOBJ(fileURL, 1, 0,0,0,0,0,0, false, true)
+                  shape.vertices.map(v=>{ v*=size })
                   vertices = shape.vertices
                   normals  = shape.normals
                   uvs      = shape.uvs
+                  normalVecs = []
+                  for(var i = 0; i < normals.length; i += 6){
+                    var x = normals[i+3] - normals[i+0]
+                    var y = normals[i+4] - normals[i+1]
+                    var z = normals[i+5] - normals[i+2]
+                    normalVecs.push(x,y,z)
+                  }
+                  //console.log(shape.normals)
                 break
                 default:
                   await fetch(fileURL).then(res=>res.json()).then(data => {
