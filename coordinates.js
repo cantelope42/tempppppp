@@ -2608,7 +2608,9 @@ const LoadGeometry = async (renderer, geoOptions) => {
               switch(shapeType){
                 case 'obj':
                   shape = await LoadOBJ(fileURL, 1, 0,0,0,0,0,0, false, true)
-                  shape.vertices.map(v=>{ v*=size })
+                  for(var i = 0; i < vertices.length; i++){
+                    vertices[i] *= size
+                  }
                   vertices = shape.vertices
                   normals  = shape.normals
                   uvs      = shape.uvs
