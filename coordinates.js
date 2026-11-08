@@ -2619,9 +2619,15 @@ const LoadGeometry = async (renderer, geoOptions) => {
                     var x = normals[i+3] - normals[i+0]
                     var y = normals[i+4] - normals[i+1]
                     var z = normals[i+5] - normals[i+2]
-                    normalVecs.push(x,y,z)
+                    d=Math.hypot(x,y,z)
+                    var x1 = normals[i+0] *= size/2
+                    var y1 = normals[i+1] *= size/2
+                    var z1 = normals[i+2] *= size/2
+                    normals[i+3] = x1 + x/d
+                    normals[i+4] = y1 + y/d
+                    normals[i+5] = z1 + z/d
+                    normalVecs.push(x/d,y/d,z/d)
                   }
-                  //console.log(shape.normals)
                 break
                 default:
                   await fetch(fileURL).then(res=>res.json()).then(data => {
