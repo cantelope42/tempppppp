@@ -2638,7 +2638,8 @@ const LoadGeometry = async (renderer, geoOptions) => {
                     normals     = data.normals
                     normalVecs  = data.normalVecs.map(v=>-v)
                     cache.geometry.push({data: structuredClone(data), url: fileURL})
-                  })                break
+                  })
+                break
               }
 
               resolved = true
