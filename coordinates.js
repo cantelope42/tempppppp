@@ -2578,7 +2578,19 @@ const LoadGeometry = async (renderer, geoOptions) => {
              ){
             resolved = true;
             url = `${ModuleBase}/new%20shapes/`
-            fileURL = `${url}${hint}.json?4`
+            switch(hint){
+              case 'torus_0':
+                fileURL = `${url}torus_5kpoly.obj`
+                shapeType = 'obj'
+              break
+              case 'torus knot_0':
+                fileURL = `${url}torus_knot_6kpoly.obj`
+                shapeType = 'obj'
+              break
+              default:
+                fileURL = `${url}${hint}.json`
+              break
+            }
             if(involveCache && (cacheItem = cache.geometry.filter(v=>v.url==fileURL)).length){
               console.log(`found geometry (${hint}) in cache... using it`)
               var data          = cacheItem[0].data
@@ -2593,32 +2605,42 @@ const LoadGeometry = async (renderer, geoOptions) => {
               resolvedFromCache     = true
               resolved = true
             }else{
-              await fetch(fileURL).then(res=>res.json()).then(data => {
-                if(data?.normalAssocs) normalAssocs = data.normalAssocs
-                if(data?.flatShadingNormalVecs) {
-                  flatShadingNormalVecs = data.flatShadingNormalVecs.map(v=>-v)
-                }
-                if(data?.stride) stride = data.stride
-                if(data?.fsnvstate) fsnvstate= data.shapeData.map(v=>v)
-                if(data?.shapeData) {
-                  isShapeArray = true
-                  shapeData = data.shapeData.map(v=>v)
-                }
-                if(data?.vstate) vstate = data.vstate.map(v=>v)
-                if(data?.nvstate) nvstate = data.nvstate.map(v=>v)
-                //if(data?.uvstate) {
-                //  uvs = data.uvstate.map(v=>-v)
-                //}else{
-                  uvs         = data.uvs
-                //}
-                if(data?.nstate) {
-                  geometry.nstate = data.nstate.map(v=>-v)
-                }
-                vertices    = data.vertices
-                normals     = data.normals
-                normalVecs  = data.normalVecs.map(v=>-v)
-                cache.geometry.push({data: structuredClone(data), url: fileURL})
-              })
+              switch(shapeType){
+                case 'obj':
+                  shape = await LoadOBJ(fileURL, size, 0,0,0,0,0,0, false, true)
+                  vertices = shape.vertices
+                  normals  = shape.normals
+                  uvs      = shape.uvs
+                break
+                default:
+                  await fetch(fileURL).then(res=>res.json()).then(data => {
+                    if(data?.normalAssocs) normalAssocs = data.normalAssocs
+                    if(data?.flatShadingNormalVecs) {
+                      flatShadingNormalVecs = data.flatShadingNormalVecs.map(v=>-v)
+                    }
+                    if(data?.stride) stride = data.stride
+                    if(data?.fsnvstate) fsnvstate= data.shapeData.map(v=>v)
+                    if(data?.shapeData) {
+                      isShapeArray = true
+                      shapeData = data.shapeData.map(v=>v)
+                    }
+                    if(data?.vstate) vstate = data.vstate.map(v=>v)
+                    if(data?.nvstate) nvstate = data.nvstate.map(v=>v)
+                    //if(data?.uvstate) {
+                    //  uvs = data.uvstate.map(v=>-v)
+                    //}else{
+                      uvs         = data.uvs
+                    //}
+                    if(data?.nstate) {
+                      geometry.nstate = data.nstate.map(v=>-v)
+                    }
+                    vertices    = data.vertices
+                    normals     = data.normals
+                    normalVecs  = data.normalVecs.map(v=>-v)
+                    cache.geometry.push({data: structuredClone(data), url: fileURL})
+                  })                break
+              }
+
               resolved = true
             }
           }else{
@@ -2631,7 +2653,7 @@ const LoadGeometry = async (renderer, geoOptions) => {
   if(!resolved){
     // involve cache
     switch(shapeType){
-      case 'custom shape': case 'lines':
+      case 'custom shape': case 'lines': case 'obj':
         if(shapeType == 'lines'){
           if(!url) break
           isLine = true
